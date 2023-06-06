@@ -13,7 +13,7 @@ void print_dog(struct dog *d)
 
 	if (d->name == NULL)
 	{
-		d->name = malloc(sizeof(char *) * strlen("(nil)") + 1);
+		d->name = malloc(sizeof(char *) * (strlen("(nil)") + 1));
 		strcpy(d->name, "(nil)");
 	}
 	printf("Name: %s\nAge: %f\nOwner: %s\n", d->name, d->age, d->owner);
