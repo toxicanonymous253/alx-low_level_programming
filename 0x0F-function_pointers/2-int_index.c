@@ -13,6 +13,9 @@ int int_index(int *array, int size, int (*cmp) (int))
 	int i = 0;
 	int *array_malloc;
 
+	if (array == NULL || cmp == NULL)
+		return (-1);
+
 	array_malloc = (int *)malloc(sizeof(int) * size);
 
 	if (array_malloc == NULL)
