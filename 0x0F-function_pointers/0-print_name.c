@@ -8,5 +8,15 @@
 
 void print_name(char *name, void (*f)(char *))
 {
-	(*f)(name);
+	char *mem;
+
+	mem = malloc(sizeof(char));
+	if (mem == NULL)
+		return;
+
+	strcpy(mem, name);
+
+	(*f)(mem);
+
+	free(mem);
 }

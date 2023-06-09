@@ -25,4 +25,5 @@ void array_iterator(int *array, size_t size, void (*action)(int))
 		array_malloc[i] = array[i];
 		(*action)(array_malloc[i]);
 	}
+	free(array_malloc);
 }
