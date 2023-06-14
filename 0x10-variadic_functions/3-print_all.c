@@ -50,5 +50,6 @@ void print_all(const char * const format, ...)
 		index++;
 	}
 	printf("\n");
+
 	va_end(args);
 }
