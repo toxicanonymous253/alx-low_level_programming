@@ -8,7 +8,6 @@
 
 void print_all(const char * const format, ...)
 {
-	int format_specifier;
 	int index = 0;
 	int format_length = 0;
 
@@ -21,25 +20,23 @@ void print_all(const char * const format, ...)
 
 	while (index < format_length)
 	{
-		format_specifier = format[index];
-		index++;
 
-		if (format_specifier == 'c')
+		if (format[index] == 'c')
 		{
 			int c = va_arg(args, int);
 			printf("%c, ", c);
 		}
-		else if (format_specifier == 'i')
+		else if (format[index] == 'i')
 		{
 			int i = va_arg(args, int);
 			printf("%d, ", i);
 		}
-		else if (format_specifier == 'f')
+		else if (format[index] == 'f')
 		{
 			float f = va_arg (args, double);
 			printf("%f, ", f);
 		}
-		else if (format_specifier == 's')
+		else if (format[index] == 's')
 		{
 			char *s = va_arg(args, char *);
 
@@ -50,6 +47,7 @@ void print_all(const char * const format, ...)
 			else
 				printf("%s", s);
 		}
+		index++;
 	}
 	printf("\n");
 	va_end(args);
