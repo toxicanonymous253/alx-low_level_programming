@@ -1,0 +1,1 @@
+Simple shopping cart programme written in C.
