@@ -53,9 +53,9 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	}
 
 	/*writing the contents of the file on the console*/
-	content_written = write(STDOUT_FILENO, buffer, letters);
+	content_written = write(STDOUT_FILENO, buffer, content_read);
 
-	if (content_written == -1)
+	if (content_written == -1 || content_read != content_written)
 	{
 		free(buffer);
 		return (0);
