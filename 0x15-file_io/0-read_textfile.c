@@ -16,15 +16,29 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int result, fd, content_read, content_written;
+	int fd, content_read, content_written;
 	/*buffer to store the words*/
-	char buffer[1024];
+	char *buffer;
 
+	/*Check if filename exists*/
+	if (filename == NULL)
+	{
+		return (0);
+	}
 	/*open the file using open()*/
-	fd = open(filename, O_RDWR | O_CREAT, 0644);
+	fd = open(filename, O_RDONLY);
 
 	/*if file fails to open*/
 	if (fd == -1)
+	{
+		return (0);
+	}
+
+	/*allocate mem for the content*/
+	buffer = malloc(sizeof(char) * letters);
+
+	/*checking if mem has been allocated*/
+	if (buffer == NULL)
 	{
 		return (0);
 	}
@@ -34,24 +48,22 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	if (content_read == -1)
 	{
+		free(buffer);
 		return (0);
 	}
 
-	/*writing the contents of the file*/
-	content_written = write(fd, buffer, letters);
+	/*writing the contents of the file on the console*/
+	content_written = write(STDOUT_FILENO, buffer, content_read);
 
-	if (content_written == -1)
+	if (content_written == -1 || content_read != content_written)
 	{
+		free(buffer);
 		return (0);
 	}
-
+	/*Free memory*/
+	free(buffer);
 	/*close the file when done with it*/
-	result = close(fd);
-	if (result == -1)
-	{
-		return (0);
-	}
-
+	close(fd);
+	/*output content of the file*/
 	return (content_written);
-
 }
