@@ -8,8 +8,8 @@ int main(int argc, char **argv)
 	/*Checking if the nunmber of arguments is not less than 3*/
 	if (argc != 3)
 	{
-		exit(97);
 		fprintf(stderr, "Usage: cp %s %s\n", argv[1], argv[2]);
+		exit(97);
 	}
 	/*truncate if destination file already exists*/
 	dest_fd = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
