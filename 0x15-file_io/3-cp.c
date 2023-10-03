@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 	/*Checking if the nunmber of arguments is not less than 3*/
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: cp %s %s\n", argv[1], argv[2]);
+		dprintf(STDERR_FILENO, "Usage: cp %s %s\n", argv[1], argv[2]);
 		exit(97);
 	}
 	/*truncate if destination file already exists*/
@@ -16,14 +16,14 @@ int main(int argc, char **argv)
 	/*if destination file does not exist*/
 	if (dest_fd == -1)
 	{
-		fprintf(stderr, "Erro: Can't write to %s\n", argv[2]);
+		dprintf(STDERR_FILENO, "Erro: Can't write to %s\n", argv[2]);
 		close(dest_fd);
 		exit(99);
 	}
 	/*Channge permissions of destination file*/
 	if (chmod(argv[2], 0664) == -1)
 	{
-		fprintf(stderr, "Error: Can't change permissions of %s\n", argv[2]);
+		dprintf(STDERR_FILENO, "Error: Can't change permissions of %s\n", argv[2]);
 		close(dest_fd);
 		exit(1);
 	}
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	/*if source file does not exist*/
 	if (source_fd == -1)
 	{
-		fprintf(stderr, "Error: Can't read from %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from %s\n", argv[1]);
 		close(source_fd);
 		close(dest_fd);
 		exit(98);
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
 		if (content_to_write == -1)
 		{
-			fprintf(stderr, "Error: Can't write to %s\n", argv[2]);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			close(source_fd);
 			close(dest_fd);
 			exit(99);
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	}
 	if (content_to_read == -1)
 	{
-		fprintf(stderr, "Error: Can't read from %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from %s\n", argv[1]);
 		close(source_fd);
 		close(dest_fd);
 		exit(98);
