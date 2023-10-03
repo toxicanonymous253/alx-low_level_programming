@@ -3,12 +3,12 @@
 #define BUFFER_SIZE 1024
 int main(int argc, char **argv)
 {
-	int dest_fd, source_fd, content_to_read, content_to_write;
+	int dest_fd, source_fd, content_to_read, content_to_write, check;
 	char buffer[BUFFER_SIZE];
 	/*Checking if the nunmber of arguments is not less than 3*/
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp %s %s\n", argv[1], argv[2]);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 	/*truncate if destination file already exists*/
@@ -58,7 +58,18 @@ int main(int argc, char **argv)
 		exit(98);
 	}
 	/*Closing the files after the operation has ended*/
-	close(source_fd);
-	close(dest_fd);
+	check = close(source_fd);
+	/*if file cannot be closed*/
+	if (check == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", source_fd);
+		exit(100);
+	}
+	/*if file cannot be closed*/
+	check = close(dest_fd);
+	if (check == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", dest_fd);
+	}
 	return (0);
 }
