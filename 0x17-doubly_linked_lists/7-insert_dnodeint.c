@@ -25,28 +25,16 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		return (NULL);
 	}
-	/*if the node to be add is at the first index*/
-	if (idx == 0)
-	{
-		r = malloc(sizeof(dlistint_t));
-		if (r == NULL)
-		{
-			return (NULL);
-		}
-		r->prev = NULL;
-		r->n = n;
-		r->next = *h;
-		(*h)->prev = r;
-		*h = r;
-		return (*h);
-	}
 	/*If the node is in the middle*/
 	temp = *h;
 	if (idx > 0)
 	{
-		for (i = 1; i < idx; i++)
+		if(temp != NULL && temp->next != NULL)
 		{
-			temp = temp->next;
+			for (i = 1; i < idx; i++)
+			{
+				temp = temp->next;
+			}
 		}
 		r = malloc(sizeof(dlistint_t));
 		r->prev = temp;
