@@ -9,7 +9,7 @@
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	dlistint_t *temp, *r;
-	unsigned int i, count = 0;
+	unsigned int i, count = 0, j = 0;
 	/*Checking if the linked list is NULL*/
 	if (*h == NULL)
 	{
@@ -21,7 +21,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		temp = temp->next;
 		count++;
 	}
-	if (idx > count || idx < 0)
+	if (idx > count && idx < j)
 	{
 		return (NULL);
 	}
