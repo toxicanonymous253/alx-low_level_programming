@@ -11,20 +11,14 @@
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index = key_index((const unsigned char *)key, ht->size);
+	/*Allocating memory for the item*/
 	hash_node_t *item = (hash_node_t *) malloc(sizeof(hash_node_t));
 	/*used to check if there is data in the array of the hash table*/
 	hash_node_t *curr_item = ht->array[index];
 
-	if (key == NULL)
-	{
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
-	}
-	/*Allocating memory for the item*/
 
-	if (item == NULL)
-	{
-		return (0);
-	}
 	item->key = strdup(key); /*make a copy of key*/
 
 	if (item->key == NULL)
